@@ -1,0 +1,27 @@
+require 'encipher'
+require 'trollop'
+
+SUB_COMMANDS = %w(generate_key encrypt decrypt)
+
+global_opts = Trollop::options do
+  banner "Encipher a credential encryption tool"
+  stop_on SUB_COMMANDS
+end
+
+cmd = ARGV.shift
+cmd_opts = case cmd
+  when "generate_key"
+    puts Encipher::Encipher.new.generate_key
+  when "encrypt"
+    if text = ARGV.shift
+      puts Encipher::Encipher.new.encrypt(text)
+    else
+      STDERR.puts "usage: encipher encrypt <text>"
+    end
+  when "decrypt"
+    if text = ARGV.shift
+      puts Encipher::Encipher.new.decrypt(text)
+    else
+      STDERR.puts "usage: encipher decrypt <text>"
+    end
+end
