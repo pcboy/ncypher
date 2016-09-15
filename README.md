@@ -24,7 +24,7 @@ Or install it yourself as:
 ## Basic Usage
 
 First generate a new encryption key. Typically this key needs to be in your .gitignore.
-You don't want it to be pushed to the repository. This file will be used by encipher each time you need to encrypt/decrypt something.
+You don't want it to be pushed to the repository. This file will be used by encipher each time you need to encrypt/decrypt something. You need to call it `.encipher_key` and put it in the current folder or any other folder before. (i.e ~/.encipher_key is fine for instance).
 ```
 $> encipher generate_key > .encipher_key
 ```
