@@ -50,7 +50,7 @@ module Encipher
 
     def find_keyfile(folder: '.')
       path = "#{folder}/#{@key_filename}"
-      return File.read(path) if File.exists?(path)
+      return File.read(path) if File.exist?(path)
       return nil if folder == '/'
       folder = File.expand_path("#{folder}/../")
       find_keyfile(folder: folder)

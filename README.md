@@ -1,9 +1,9 @@
 [![Code Climate](https://codeclimate.com/github/pcboy/encipher/badges/gpa.svg)](https://codeclimate.com/github/pcboy/encipher)
 [![Build Status](https://travis-ci.org/pcboy/encipher.svg)](https://travis-ci.org/pcboy/encipher)
 
-# Encipher
+# EnCipher
 
-Encipher is a gem to help you to encrypt your credentials in your ruby apps in a safe manner.
+EnCipher is a gem to help you to encrypt your credentials in your ruby apps in a safe manner.
 
 ## Installation
 
