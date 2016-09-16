@@ -8,7 +8,7 @@ deploy:
   provider: rubygems
   api_key:
     secure: ahAeEGLzp7Y3lPGTmPC1UeuVkE8WwBmdDu7JXm9Hf5FRc3AIQgf+eEFB+M6jDqithbA5kyC59UwsP/tohwBGRFwPpFrxgFT4dKxjgzec+wR2jlEcoFqUzc9Tug2IHBLIMMhK1Vo7FPJJ3J0Fho+VDlOYnG9nV69Lhf9A82BAPtQ=
-  gem: encipher
+  gem: ncipher
   on:
     tags: true
-    repo: pcboy/encipher
+    repo: pcboy/ncipher
