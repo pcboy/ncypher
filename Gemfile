@@ -1,4 +1,4 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in encipher.gemspec
+# Specify your gem's dependencies in ncipher.gemspec
 gemspec

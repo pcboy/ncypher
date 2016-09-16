@@ -1,16 +1,16 @@
-[![Code Climate](https://codeclimate.com/github/pcboy/encipher/badges/gpa.svg)](https://codeclimate.com/github/pcboy/encipher)
-[![Build Status](https://travis-ci.org/pcboy/encipher.svg)](https://travis-ci.org/pcboy/encipher)
+[![Code Climate](https://codeclimate.com/github/pcboy/ncipher/badges/gpa.svg)](https://codeclimate.com/github/pcboy/ncipher)
+[![Build Status](https://travis-ci.org/pcboy/ncipher.svg)](https://travis-ci.org/pcboy/ncipher)
 
-# EnCipher
+# Ncipher
 
-EnCipher is a gem to help you to encrypt your credentials in your ruby apps in a safe manner.
+Ncipher is a gem to help you to encrypt your credentials in your ruby apps in a safe manner.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'encipher'
+gem 'ncipher'
 ```
 
 And then execute:
@@ -19,38 +19,38 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install encipher
+    $ gem install ncipher
 
 ## Basic Usage
 
 First generate a new encryption key. Typically this key needs to be in your .gitignore.
-You don't want it to be pushed to the repository. This file will be used by encipher each time you need to encrypt/decrypt something. You need to call it `.encipher_key` and put it in the current folder or any other folder before. (i.e ~/.encipher_key is fine for instance).
+You don't want it to be pushed to the repository. This file will be used by ncipher each time you need to encrypt/decrypt something. You need to call it `.ncipher_key` and put it in the current folder or any other folder before. (i.e ~/.ncipher_key is fine for instance).
 ```
-$> encipher generate_key > .encipher_key
+$> ncipher generate_key > .ncipher_key
 ```
-You can also set the env variable `ENCIPHER_KEY` to that generated key (i.e `export ENCIPHER_KEY=kSzARCAw9uv/LQ1o75k5ica1oCpZBUCpP99Sy+s6L2c=`) instead of saving it to a file 
+You can also set the env variable `NCIPHER_KEY` to that generated key (i.e `export NCIPHER_KEY=kSzARCAw9uv/LQ1o75k5ica1oCpZBUCpP99Sy+s6L2c=`) instead of saving it to a file 
 
 To encrypt a new password (or anything else):
 ```
-$> encipher encrypt 'p4$$w0rd'
+$> ncipher encrypt 'p4$$w0rd'
 deB7ba27qR470UetK/HW47dYMN7p9hguuDiVt59U+Bly6cfQcjgbw/ui/2hBhCEa
 ```
 
 Now you can directy put in your .yaml files:
 ```
 defaults: &defaults
-  my_password: <%= Encipher::Encipher.decrypt('lXEwfKv4dEjmK0kojEAnikNsLCsVCtSMiR2aSfM6uUXYn2DzCZ3O7SA9HaGnMp/kEEsI') %>
+  my_password: <%= Ncipher::Ncipher.decrypt('lXEwfKv4dEjmK0kojEAnikNsLCsVCtSMiR2aSfM6uUXYn2DzCZ3O7SA9HaGnMp/kEEsI') %>
 ```
 
-And Encipher::Encipher.decrypt will magically use your key in `.encipher_key` to decrypt that password at runtime. 
-Note, you can also use the decrypt parameter in the encipher binary to do the decryption:
+And Ncipher::Ncipher.decrypt will magically use your key in `.ncipher_key` to decrypt that password at runtime. 
+Note, you can also use the decrypt parameter in the ncipher binary to do the decryption:
 ```
-$> encipher decrypt deB7ba27qR470UetK/HW47dYMN7p9hguuDiVt59U+Bly6cfQcjgbw/ui/2hBhCEa 
+$> ncipher decrypt deB7ba27qR470UetK/HW47dYMN7p9hguuDiVt59U+Bly6cfQcjgbw/ui/2hBhCEa 
 p4$$w0rd 
 ```
 So in the end:
 ```
-$> encipher decrypt `encipher encrypt 'p4$$w0rd'`
+$> ncipher decrypt `ncipher encrypt 'p4$$w0rd'`
 p4$$w0rd
 ```
 
@@ -64,5 +64,5 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/pcboy/encipher. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/pcboy/ncipher. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
