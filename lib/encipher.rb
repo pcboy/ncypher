@@ -25,6 +25,12 @@ module Encipher
       Base64.strict_encode64(generated_key)
     end
 
+    def key
+      saved_key = ENV['ENCIPHER_KEY'] || find_keyfile
+      abort "Can't find .encipher_key file or ENCIPHER_KEY env variable" if saved_key.nil?
+      Base64.decode64(saved_key)
+    end
+
     def self.decrypt(cyphertext_b64)
       Encipher.new.decrypt cyphertext_b64
     end
@@ -37,15 +43,13 @@ module Encipher
       Encipher.new.generate_key
     end
 
+    def self.key
+      Encipher.new.key
+    end
+
     private
     def box
       RbNaCl::SimpleBox.from_secret_key(key)
-    end
-
-    def key
-      saved_key = ENV['ENCIPHER_KEY'] || find_keyfile
-      abort "Can't find .encipher_key file or ENCIPHER_KEY env variable" if saved_key.nil?
-      Base64.decode64(saved_key)
     end
 
     def find_keyfile(folder: '.')
