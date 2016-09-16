@@ -25,6 +25,4 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'rbnacl-libsodium', '~> 1.0.10'
   spec.add_dependency 'rbnacl', '~> 3.0.1'
-  spec.add_dependency 'trollop', '~> 2.1'
-
 end
