@@ -13,7 +13,7 @@ module Ncipher
     end
 
     def decrypt(ciphertext_b64)
-      box.decrypt(Base64.strict_decode64(ciphertext_b64))
+      box.decrypt(Base64.strict_decode64(ciphertext_b64.strip))
     end
 
     def encrypt(plaintext)
@@ -28,7 +28,11 @@ module Ncipher
     def key
       saved_key = ENV['NCIPHER_KEY'] || find_keyfile
       abort "Can't find .ncipher_key file or NCIPHER_KEY env variable" if saved_key.nil?
-      Base64.decode64(saved_key)
+      Base64.strict_decode64(saved_key.strip)
+    end
+
+    def key_b64
+      Base64.strict_encode64 key
     end
 
     def self.decrypt(cyphertext_b64)
@@ -45,6 +49,10 @@ module Ncipher
 
     def self.key
       Ncipher.new.key
+    end
+
+    def self.key_b64
+      Ncipher.new.key_b64
     end
 
     private
