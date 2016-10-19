@@ -1,0 +1,33 @@
+#!/usr/bin/env ruby
+require 'ncypher'
+
+SUB_COMMANDS = %w(generate_key encrypt decrypt)
+
+if ARGV.empty?
+  STDERR.puts "Ncypher a credential encryption tool"
+  STDERR.puts "usage: ncypher generate_key"
+  STDERR.puts "usage: ncypher key"
+  STDERR.puts "usage: ncypher encrypt <text>"
+  STDERR.puts "usage: ncypher decrypt <text>"
+  abort
+end
+
+cmd = ARGV.shift
+case cmd
+  when "generate_key"
+    puts Ncypher::Ncypher.new.generate_key
+  when "key"
+    puts Ncypher::Ncypher.new.key_b64
+  when "encrypt"
+    if text = ARGV.shift
+      puts Ncypher::Ncypher.new.encrypt(text)
+    else
+      STDERR.puts "usage: Ncypher encrypt <text>"
+    end
+  when "decrypt"
+    if text = ARGV.shift
+      puts Ncypher::Ncypher.new.decrypt(text)
+    else
+      STDERR.puts "usage: Ncypher decrypt <text>"
+    end
+end

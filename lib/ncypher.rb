@@ -1,14 +1,14 @@
-require "ncipher/version"
+require "ncypher/version"
 
 require 'base64'
 require 'rbnacl/libsodium'
 require 'rbnacl'
 
-module Ncipher
+module Ncypher
 
-  class Ncipher
+  class Ncypher
 
-    def initialize(key_filename: '.ncipher_key')
+    def initialize(key_filename: '.ncypher_key')
       @key_filename = key_filename
     end
 
@@ -26,8 +26,8 @@ module Ncipher
     end
 
     def key
-      saved_key = ENV['NCIPHER_KEY'] || find_keyfile
-      abort "Can't find .ncipher_key file or NCIPHER_KEY env variable" if saved_key.nil?
+      saved_key = ENV['NCYPHER_KEY'] || find_keyfile
+      abort "Can't find .ncypher_key file or NCYPHER_KEY env variable" if saved_key.nil?
       Base64.strict_decode64(saved_key.strip)
     end
 
@@ -36,23 +36,23 @@ module Ncipher
     end
 
     def self.decrypt(cyphertext_b64)
-      Ncipher.new.decrypt cyphertext_b64
+      Ncypher.new.decrypt cyphertext_b64
     end
 
     def self.encrypt(plaintext)
-      Ncipher.new.encrypt plaintext
+      Ncypher.new.encrypt plaintext
     end
 
     def self.generate_key
-      Ncipher.new.generate_key
+      Ncypher.new.generate_key
     end
 
     def self.key
-      Ncipher.new.key
+      Ncypher.new.key
     end
 
     def self.key_b64
-      Ncipher.new.key_b64
+      Ncypher.new.key_b64
     end
 
     private

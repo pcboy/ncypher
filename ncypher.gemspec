@@ -1,17 +1,17 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'ncipher/version'
+require 'ncypher/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "ncipher"
-  spec.version       = Ncipher::VERSION
+  spec.name          = "ncypher"
+  spec.version       = Ncypher::VERSION
   spec.authors       = ["David Hagege"]
   spec.email         = ["david.hagege@gmail.com"]
 
-  spec.summary       = %q{Ncipher lets you encrypt/decrypt credentials in a safe and transparent way}
+  spec.summary       = %q{Ncypher lets you encrypt/decrypt credentials in a safe and transparent way}
   spec.description   = %q{}
-  spec.homepage      = "https://github.com/pcboy/ncipher"
+  spec.homepage      = "https://github.com/pcboy/ncypher"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   spec.bindir        = "exe"
