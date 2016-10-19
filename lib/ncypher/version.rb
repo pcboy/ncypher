@@ -1,3 +1,3 @@
-module Ncipher
+module Ncypher
   VERSION = "0.3.4"
 end
