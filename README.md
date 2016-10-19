@@ -1,5 +1,4 @@
 [![Code Climate](https://codeclimate.com/github/pcboy/ncypher/badges/gpa.svg)](https://codeclimate.com/github/pcboy/ncypher)
-[![codebeat badge](https://codebeat.co/badges/411b2b78-0734-40ec-9ca2-4383f66cf92f)](https://codebeat.co/projects/github-com-pcboy-ncypher)
 [![Build Status](https://travis-ci.org/pcboy/ncypher.svg)](https://travis-ci.org/pcboy/ncypher)
 
 # Ncypher
