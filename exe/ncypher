@@ -19,15 +19,9 @@ case cmd
   when "key"
     puts Ncypher::Ncypher.new.key_b64
   when "encrypt"
-    if text = ARGV.shift
-      puts Ncypher::Ncypher.new.encrypt(text)
-    else
-      STDERR.puts "usage: Ncypher encrypt <text>"
-    end
+    text = (ARGV.shift || STDIN.read)
+    puts Ncypher::Ncypher.new.encrypt(text)
   when "decrypt"
-    if text = ARGV.shift
-      puts Ncypher::Ncypher.new.decrypt(text)
-    else
-      STDERR.puts "usage: Ncypher decrypt <text>"
-    end
+    text = (ARGV.shift || STDIN.read)
+    puts Ncypher::Ncypher.new.decrypt(text)
 end
