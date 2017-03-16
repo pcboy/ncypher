@@ -1,6 +1,12 @@
 #!/usr/bin/env ruby
 require 'ncypher'
 
+begin
+  Object.const_get('Ncypher')
+rescue NameError
+  require 'bundler/setup'
+end
+
 SUB_COMMANDS = %w(generate_key encrypt decrypt)
 
 if ARGV.empty?
