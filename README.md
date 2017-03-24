@@ -30,19 +30,24 @@ $> ncypher generate_key > .ncypher_key
 ```
 You can also set the env variable `NCYPHER_KEY` to that generated key (i.e `export NCYPHER_KEY=kSzARCAw9uv/LQ1o75k5ica1oCpZBUCpP99Sy+s6L2c=`) instead of saving it to a file 
 
-To encrypt a new password (or anything else):
+To encrypt a new password (or anything else), ncypher supports stdin. So you can do:
+```
+$> cat secret_file | ncypher encrypt > secret_file.encrypted
+$> cat secret_file.encrypted | ncypher decrypt > secret_file
+$> ncypher encrypt
+mypassword
+<CTRL+D>
+TAmmvlinPFBmH9bx+IW9L5lKkRdgv3Yv3P4kyyIs0uTTyiTunG7vZ+DNVHMJiuviHOHg
+```
+I highly recommend you to always use that method! As passing the password as parameter will keep it in your shell history (unless you have HISTFILE=/dev/null).
+
+If you want to do it by passing the pass as parameter:
+
 ```
 $> ncypher encrypt 'p4$$w0rd'
 deB7ba27qR470UetK/HW47dYMN7p9hguuDiVt59U+Bly6cfQcjgbw/ui/2hBhCEa
 ```
 
-Now you can directy put in your .yaml files:
-```
-defaults: &defaults
-  my_password: <%= Ncypher::Ncypher.decrypt('lXEwfKv4dEjmK0kojEAnikNsLCsVCtSMiR2aSfM6uUXYn2DzCZ3O7SA9HaGnMp/kEEsI') %>
-```
-
-And Ncypher::Ncypher.decrypt will magically use your key in `.ncypher_key` to decrypt that password at runtime. 
 Note, you can also use the decrypt parameter in the ncypher binary to do the decryption:
 ```
 $> ncypher decrypt deB7ba27qR470UetK/HW47dYMN7p9hguuDiVt59U+Bly6cfQcjgbw/ui/2hBhCEa 
@@ -56,11 +61,15 @@ p4$$w0rd
 
 :)
 
-ncypher also supports stdin. So you can do
+And Ncypher::Ncypher.decrypt will magically use your key in `.ncypher_key` to decrypt that password at runtime. 
+Now you can directy put in your .yaml files:
 ```
-$> cat secret_file | ncypher encrypt > secret_file.encrypted
-$> cat secret_file.encrypted | ncypher decrypt > secret_file
+defaults: &defaults
+  my_password: <%= Ncypher::Ncypher.decrypt('lXEwfKv4dEjmK0kojEAnikNsLCsVCtSMiR2aSfM6uUXYn2DzCZ3O7SA9HaGnMp/kEEsI') %>
 ```
+
+
+
 
 ## Development
 
