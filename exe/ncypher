@@ -26,8 +26,8 @@ case cmd
     puts Ncypher::Ncypher.new.key_b64
   when "encrypt"
     text = (ARGV.shift || STDIN.read)
-    puts Ncypher::Ncypher.new.encrypt(text)
+    puts Ncypher::Ncypher.new.encrypt(text.strip)
   when "decrypt"
     text = (ARGV.shift || STDIN.read)
-    puts Ncypher::Ncypher.new.decrypt(text)
+    puts Ncypher::Ncypher.new.decrypt(text.strip)
 end
