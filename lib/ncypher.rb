@@ -8,7 +8,8 @@ module Ncypher
 
   class Ncypher
 
-    def initialize(key_filename: '.ncypher_key')
+    def initialize(key_filename: '.ncypher_key', key: nil)
+      @key = key ? Base64.strict_decode64(key.strip) : nil
       @key_filename = key_filename
     end
 
@@ -26,9 +27,11 @@ module Ncypher
     end
 
     def key
-      saved_key = ENV['NCYPHER_KEY'] || find_keyfile
-      abort "Can't find .ncypher_key file or NCYPHER_KEY env variable" if saved_key.nil?
-      Base64.strict_decode64(saved_key.strip)
+      @key ||= begin
+                 saved_key = ENV['NCYPHER_KEY'] || find_keyfile
+                 abort "Can't find .ncypher_key file or NCYPHER_KEY env variable" if saved_key.nil?
+                 Base64.strict_decode64(saved_key.strip)
+               end
     end
 
     def key_b64
