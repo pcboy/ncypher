@@ -1,10 +1,10 @@
 #!/usr/bin/env ruby
-require 'ncypher'
+require "ncypher"
 
 begin
-  Object.const_get('Ncypher')
+  Object.const_get("Ncypher")
 rescue NameError
-  require 'bundler/setup'
+  require "bundler/setup"
 end
 
 SUB_COMMANDS = %w(generate_key encrypt decrypt)
@@ -12,6 +12,7 @@ SUB_COMMANDS = %w(generate_key encrypt decrypt)
 if ARGV.empty?
   STDERR.puts "Ncypher a credential encryption tool"
   STDERR.puts "usage: ncypher generate_key"
+  STDERR.puts "usage: ncypher derive_key <password> [salt]"
   STDERR.puts "usage: ncypher key"
   STDERR.puts "usage: ncypher encrypt <text>"
   STDERR.puts "usage: ncypher decrypt <text>"
@@ -20,14 +21,24 @@ end
 
 cmd = ARGV.shift
 case cmd
-  when "generate_key"
-    puts Ncypher::Ncypher.new.generate_key
-  when "key"
-    puts Ncypher::Ncypher.new.key_b64
-  when "encrypt"
-    text = (ARGV.shift || STDIN.read)
-    puts Ncypher::Ncypher.new.encrypt(text.strip)
-  when "decrypt"
-    text = (ARGV.shift || STDIN.read)
-    puts Ncypher::Ncypher.new.decrypt(text.strip)
+when "generate_key"
+  puts Ncypher::Ncypher.new.generate_key
+when "derive_key"
+  password = ARGV.shift
+  unless password
+    abort "ncypher derive_key <password> [salt]"
+  end
+  salt = File.exists?(".ncypher_salt") ? File.read(".ncypher_salt")&.strip : ARGV.shift
+  key, used_salt = Ncypher::Ncypher.new.derive_key(password.strip, salt)
+  STDOUT.puts key
+  STDERR.puts "SALT: #{used_salt}" # Put salt on stderr so we can do ncypher deriver_key password > .ncypher_key
+                                   # and keep salt out of .ncypher_key
+when "key"
+  puts Ncypher::Ncypher.new.key_b64
+when "encrypt"
+  text = (ARGV.shift || STDIN.read)
+  puts Ncypher::Ncypher.new.encrypt(text.strip)
+when "decrypt"
+  text = (ARGV.shift || STDIN.read)
+  puts Ncypher::Ncypher.new.decrypt(text.strip)
 end

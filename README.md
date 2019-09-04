@@ -68,7 +68,25 @@ defaults: &defaults
   my_password: <%= Ncypher::Ncypher.decrypt('lXEwfKv4dEjmK0kojEAnikNsLCsVCtSMiR2aSfM6uUXYn2DzCZ3O7SA9HaGnMp/kEEsI') %>
 ```
 
+## Password derived secret key
 
+In some cases you may want to derive a key from a particular password you have memorized. You can simply do:
+
+```
+$> ncypher derive_key p4$$w0rd
+R9RgHcFnuHr+86/7v3MdDyu3V63jh69VCPMXknA2v6E=
+SALT: 4+d4JTGTxRbtXs1vYScBYg==
+```
+
+You can see that the salt is randomly generated for security reasons. You should put that salt in a `.ncypher_salt` file in the current directory (this file can be pushed to your repository). So that the next time you do `ncypher derive_key p4$$w0rd` you get the exact same ncyper\_key generated.  
+Note that the salt is written on STDERR so you can directly do:
+
+```
+$> ncypher derive_key p4$$w0rd > .ncypher_key
+SALT: WKCAkJcS65nx3lA/w1BmBw==
+```
+
+Then you have the ncypher\_key in .ncypher\_key. Be sure to save the salt if you want to be able to derive back the exact same key in the future.
 
 
 ## Development
