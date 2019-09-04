@@ -11,6 +11,13 @@ class NcypherTest < Minitest::Test
     assert_equal(encryptor.decrypt(encryptor.encrypt('test')), 'test')
   end
 
+  def test_it_can_derive_key_from_password
+    key, salt = Ncypher::Ncypher.derive_key('toto42')
+    new_key, new_salt = Ncypher::Ncypher.derive_key('toto42', salt)
+    assert_equal(salt, new_salt)
+    assert_equal(key, new_key)
+  end
+
   def test_it_can_encrypt_decrypt
     ENV['NCYPHER_KEY'] = Ncypher::Ncypher.generate_key
     assert_equal(Ncypher::Ncypher.decrypt(Ncypher::Ncypher.encrypt('tartine')), 'tartine')
