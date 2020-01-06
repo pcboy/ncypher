@@ -5,6 +5,13 @@
 
 Ncypher is a gem to help you to encrypt your credentials in your ruby apps in a safe manner.
 
+## Upgrade from versions before 1.0
+Versions before 1.0 were using rbnacl-libsodium gem which is now deprecated.  
+The big difference is that now you need to have libsodium installed on your host system.  
+That also means faster gem installation. =)  
+Check https://github.com/RubyCrypto/rbnacl/wiki/Installing-libsodium for more info.  
+
+
 ## Installation
 
 Add this line to your application's Gemfile:
