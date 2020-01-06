@@ -1,7 +1,6 @@
 require "ncypher/version"
 
 require "base64"
-require "rbnacl/password_hash"
 
 require "rbnacl"
 

@@ -10,6 +10,7 @@ Versions before 1.0 were using rbnacl-libsodium gem which is now deprecated.
 The big difference is that now you need to have libsodium installed on your host system.  
 That also means faster gem installation. =)  
 Check https://github.com/RubyCrypto/rbnacl/wiki/Installing-libsodium for more info.  
+Note: You need Argon2 support. So libsodium >= v1.0.15
 
 
 ## Installation

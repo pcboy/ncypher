@@ -2,9 +2,11 @@ sudo: false
 cache:
   bundler: true
 language: ruby
-rvm:
-  - 2.2.6
-before_install: gem install bundler -v 1.12.5
+dist: bionic
+before_install:
+  - gem install bundler -v 2.0
+  - sudo apt-get update -y
+  - sudo apt-get install -y libsodium23
 script: bundle exec rake
 deploy:
   provider: rubygems
