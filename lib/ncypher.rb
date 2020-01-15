@@ -20,7 +20,8 @@ module Ncypher
     end
 
     def generate_key
-      generated_key = RbNaCl::Random.random_bytes(RbNaCl::SecretBox.key_bytes)
+      digest_size = 32 # RbNaCl::SecretBox.key_bytes
+      generated_key = RbNaCl::Random.random_bytes(digest_size)
       Base64.strict_encode64(generated_key)
     end
 
