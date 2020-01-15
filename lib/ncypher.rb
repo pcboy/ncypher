@@ -25,14 +25,16 @@ module Ncypher
     end
 
     def derive_key(password, encoded_salt = nil)
+      salt_size = 16 # RbNaCl::PasswordHash::Argon2::SALTBYTES
       salt ||= encoded_salt ?
         Base64.strict_decode64(encoded_salt) :
-        RbNaCl::Random.random_bytes(RbNaCl::PasswordHash::Argon2::SALTBYTES)
+        RbNaCl::Random.random_bytes(salt_size)
 
       opslimit = 5
       memlimit = 7_256_678
-      digest_size = RbNaCl::SecretBox.key_bytes
-      generated_key = RbNaCl::PasswordHash.argon2(password, salt, opslimit, memlimit, digest_size)
+      digest_size = 32 #  RbNaCl::SecretBox.key_bytes
+      generated_key = RbNaCl::PasswordHash::Argon2.new(opslimit, memlimit, digest_size)
+                                                  .digest(password, salt, :argon2i)
       [Base64.strict_encode64(generated_key), Base64.strict_encode64(salt)]
     end
 
