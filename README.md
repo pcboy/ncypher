@@ -3,7 +3,7 @@
 
 # Ncypher
 
-Ncypher is a gem to help you to encrypt your credentials in your ruby apps in a safe manner.
+Ncypher is a gem to help you to encrypt your credentials in your projects in a safe manner.
 
 ## Upgrade from versions before 1.0
 Versions before 1.0 were using rbnacl-libsodium gem which is now deprecated.  
@@ -69,7 +69,7 @@ p4$$w0rd
 
 :)
 
-And Ncypher::Ncypher.decrypt will magically use your key in `.ncypher_key` to decrypt that password at runtime. 
+And if you are using ruby, Ncypher::Ncypher.decrypt will magically use your key in `.ncypher_key` to decrypt that password at runtime. 
 Now you can directy put in your .yaml files:
 ```
 defaults: &defaults
