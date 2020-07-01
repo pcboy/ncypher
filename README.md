@@ -40,8 +40,8 @@ You can also set the env variable `NCYPHER_KEY` to that generated key (i.e `expo
 
 To encrypt a new password (or anything else), ncypher supports stdin. So you can do:
 ```
-$> cat secret_file | ncypher encrypt > secret_file.encrypted
-$> cat secret_file.encrypted | ncypher decrypt > secret_file
+$> ncypher encrypt < secret_file > secret_file.encrypted
+$> ncypher decrypt < secret_file.encrypted > secret_file
 $> ncypher encrypt
 mypassword
 <CTRL+D>
