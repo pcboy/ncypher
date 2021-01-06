@@ -94,8 +94,14 @@ $> ncypher derive_key p4$$w0rd > .ncypher_key
 SALT: WKCAkJcS65nx3lA/w1BmBw==
 ```
 
-Then you have the ncypher\_key in .ncypher\_key. Be sure to save the salt if you want to be able to derive back the exact same key in the future.
+Then you have the ncypher\_key in .ncypher\_key. Be sure to save the salt if you want to be able to derive back the exact same key in the future.  
+The derive_key command also listen to stdin so for safety you can instead do:  
 
+```
+$> ncypher derive_key > .ncypher_key
+```
+
+And enter your password then CTRL+D.  
 
 ## Contributing
 
