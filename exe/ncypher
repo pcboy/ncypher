@@ -7,8 +7,6 @@ rescue NameError
   require "bundler/setup"
 end
 
-SUB_COMMANDS = %w(generate_key encrypt decrypt)
-
 if ARGV.empty?
   STDERR.puts "Ncypher a credential encryption tool"
   STDERR.puts "usage: ncypher generate_key"
@@ -24,7 +22,7 @@ case cmd
 when "generate_key"
   puts Ncypher::Ncypher.new.generate_key
 when "derive_key"
-  password = ARGV.shift
+  password = (ARGV.shift || STDIN.read)
   unless password
     abort "ncypher derive_key <password> [salt]"
   end
