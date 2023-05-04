@@ -1,0 +1,45 @@
+name: Ruby CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-20.04
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install bundler
+      run: gem install bundler -v 2.0
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update -y
+        sudo apt-get install -y libsodium23
+        bundle install
+
+    - name: Run tests
+      run: bundle exec rake
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-20.04
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Build and publish gem
+      env:
+        GEM_HOST_API_KEY: ${{ secrets.RUBYGEMS_API_KEY }}
+      run: |
+        gem build ncypher.gemspec
+        gem push ncypher-*.gem
+
+      if: |
+        github.event_name == 'push' &&
+        startsWith(github.ref, 'refs/tags/') &&
+        github.repository == 'pcboy/ncypher'
