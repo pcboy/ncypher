@@ -26,7 +26,7 @@ when "derive_key"
   unless password
     abort "ncypher derive_key <password> [salt]"
   end
-  salt = File.exists?(".ncypher_salt") ? File.read(".ncypher_salt")&.strip : ARGV.shift
+  salt = File.exist?(".ncypher_salt") ? File.read(".ncypher_salt")&.strip : ARGV.shift
   key, used_salt = Ncypher::Ncypher.new.derive_key(password.strip, salt)
   STDOUT.puts key
   STDERR.puts "SALT: #{used_salt}" # Put salt on stderr so we can do ncypher deriver_key password > .ncypher_key
