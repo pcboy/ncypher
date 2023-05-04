@@ -3,6 +3,8 @@ name: Ruby CI
 on:
   push:
     branches: [ master ]
+    tags:
+      - v*
   pull_request:
     branches: [ master ]
 
@@ -28,7 +30,7 @@ jobs:
   deploy:
     needs: test
     runs-on: ubuntu-20.04
-    if: startsWith(github.ref, 'refs/tags/v')
+    if: startsWith(github.ref, 'refs/tags/')
 
     steps:
     - uses: actions/checkout@v2
