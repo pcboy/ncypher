@@ -28,6 +28,7 @@ jobs:
   deploy:
     needs: test
     runs-on: ubuntu-20.04
+    if: startsWith(github.ref, 'refs/tags/v')
 
     steps:
     - uses: actions/checkout@v2
@@ -39,4 +40,3 @@ jobs:
         gem build ncypher.gemspec
         gem push ncypher-*.gem
 
-      if: startsWith(github.ref, 'refs/tags/v')
