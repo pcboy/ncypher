@@ -5,6 +5,11 @@
 
 Ncypher is a gem to help you to encrypt your credentials in your projects in a safe manner.
 
+## DEPRECATED
+
+This project is now deprecated. I built this in a time were these type of solutions were not common. Now rails has something similar built-in. And today I would just recommend to use [Age](https://github.com/FiloSottile/age) and [Sops](https://github.com/getsops/sops) instead.
+
+
 ## Upgrade from versions before 1.0
 Versions before 1.0 were using rbnacl-libsodium gem which is now deprecated.  
 The big difference is that now you need to have libsodium installed on your host system.  
